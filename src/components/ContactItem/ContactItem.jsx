@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import {
   useDeleteContactMutation,
   useUpdateContactMutation,
-} from 'redux/contacts/contactsAPI';
+} from 'redux/contacts/usersAPI';
 
 import { TextField, Button, Typography } from '@mui/material';
 

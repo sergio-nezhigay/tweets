@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet';
 import { Section } from 'components/Section/Section';
 
-import { useFetchContactsQuery } from 'redux/contacts/contactsAPI';
+import { useFetchContactsQuery } from 'redux/contacts/usersAPI';
 
 import { ContactForm } from 'components/ContactForm/ContactForm';
 import ContactList from 'components/ContactList/ContactList';

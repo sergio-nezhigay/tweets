@@ -1,5 +1,5 @@
 import React from 'react';
-import { useFetchContactsQuery } from 'redux/contacts/contactsAPI';
+import { useFetchContactsQuery } from 'redux/contacts/usersAPI';
 
 import { useFilter } from 'hooks/useFilter';
 import { ContactItem } from 'components/ContactItem/ContactItem';

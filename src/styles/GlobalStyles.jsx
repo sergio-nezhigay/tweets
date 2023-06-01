@@ -26,8 +26,7 @@ export const GlobalStyles = css`
   h5,
   h6,
   p {
-    margin-top: 0;
-    margin-bottom: 0;
+    margin: 0;
   }
 
   ul,

@@ -6,7 +6,7 @@ import { TextField, Button, Box } from '@mui/material';
 import {
   useAddContactMutation,
   useFetchContactsQuery,
-} from 'redux/contacts/contactsAPI';
+} from 'redux/contacts/usersAPI';
 import {
   FormContainer,
   RowContainer,
