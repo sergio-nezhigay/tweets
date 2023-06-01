@@ -31,7 +31,7 @@ export function ContactItem({ id, number, name }) {
       await updateContact(updatedContact).unwrap();
       setEditing(false);
     } catch (err) {
-      console.error('Failed to save the post: ', err);
+      console.error('Failed to save the post : ', err);
     }
   };
 
