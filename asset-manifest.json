@@ -1,27 +1,19 @@
 {
   "files": {
     "main.css": "/tweets1/static/css/main.17654e45.css",
-    "main.js": "/tweets1/static/js/main.5a3f005a.js",
-    "static/js/265.e9a77d86.chunk.js": "/tweets1/static/js/265.e9a77d86.chunk.js",
-    "static/js/989.3e93b3fd.chunk.js": "/tweets1/static/js/989.3e93b3fd.chunk.js",
-    "static/js/763.0ed88c14.chunk.js": "/tweets1/static/js/763.0ed88c14.chunk.js",
+    "main.js": "/tweets1/static/js/main.655891e7.js",
     "static/js/679.2707c3db.chunk.js": "/tweets1/static/js/679.2707c3db.chunk.js",
-    "static/js/698.511f08ac.chunk.js": "/tweets1/static/js/698.511f08ac.chunk.js",
-    "static/js/908.d5ee85b1.chunk.js": "/tweets1/static/js/908.d5ee85b1.chunk.js",
-    "static/js/568.b645aa73.chunk.js": "/tweets1/static/js/568.b645aa73.chunk.js",
+    "static/js/471.1353801e.chunk.js": "/tweets1/static/js/471.1353801e.chunk.js",
+    "static/media/tweets.png": "/tweets1/static/media/tweets.b3d9942b3f9d5dad1ff0.png",
+    "static/media/logo.svg": "/tweets1/static/media/logo.e917114d7945c04c85a8946a331d28b6.svg",
     "index.html": "/tweets1/index.html",
     "main.17654e45.css.map": "/tweets1/static/css/main.17654e45.css.map",
-    "main.5a3f005a.js.map": "/tweets1/static/js/main.5a3f005a.js.map",
-    "265.e9a77d86.chunk.js.map": "/tweets1/static/js/265.e9a77d86.chunk.js.map",
-    "989.3e93b3fd.chunk.js.map": "/tweets1/static/js/989.3e93b3fd.chunk.js.map",
-    "763.0ed88c14.chunk.js.map": "/tweets1/static/js/763.0ed88c14.chunk.js.map",
+    "main.655891e7.js.map": "/tweets1/static/js/main.655891e7.js.map",
     "679.2707c3db.chunk.js.map": "/tweets1/static/js/679.2707c3db.chunk.js.map",
-    "698.511f08ac.chunk.js.map": "/tweets1/static/js/698.511f08ac.chunk.js.map",
-    "908.d5ee85b1.chunk.js.map": "/tweets1/static/js/908.d5ee85b1.chunk.js.map",
-    "568.b645aa73.chunk.js.map": "/tweets1/static/js/568.b645aa73.chunk.js.map"
+    "471.1353801e.chunk.js.map": "/tweets1/static/js/471.1353801e.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.17654e45.css",
-    "static/js/main.5a3f005a.js"
+    "static/js/main.655891e7.js"
   ]
 }
