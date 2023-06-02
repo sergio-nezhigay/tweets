@@ -9,13 +9,13 @@ export const usersApi = createApi({
   tagTypes: ['USERS'],
   endpoints: builder => ({
     fetchUsers: builder.query({
-      query: () => `/users`,
+      query: (page = 1, limit = 3) => `/users?page=${page}&limit=${limit}`,
       providesTags: ['USERS'],
     }),
     updateUser: builder.mutation({
       query: ({ id, ...user }) => ({
         url: `/users/${id}`,
-        method: 'PATCH',
+        method: 'PUT',
         body: user,
       }),
       invalidatesTags: ['USERS'],

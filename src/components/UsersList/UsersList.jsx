@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+
 import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
 import User from 'components/User/User';
-import { useFetchUsersQuery } from 'redux/contacts/usersAPI';
+
+import { selectUsers } from 'redux/users/selectors';
+import { fetchUsers } from 'redux/users/operations';
 
 const UsersListContainer = styled.div`
   background-color: #f2f2f2;
@@ -21,18 +25,36 @@ const UserList = styled.ul`
   padding: 0;
 `;
 
+const LoadMoreButton = styled.button`
+  background-color: #555;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+`;
+
 export default function UsersList() {
-  const { data: users = [] } = useFetchUsersQuery();
-  console.log('🚀 ~ file: TweetsPage.jsx:6 ~ TweetsPage ~ users:', users);
+  const dispatch = useDispatch();
+  const users = useSelector(selectUsers);
+  const [page, setPage] = useState(1);
+  useEffect(() => {
+    dispatch(fetchUsers({ page }));
+  }, [page, dispatch]);
+  const handleLoadMore = () => {
+    setPage(page => page + 1);
+  };
 
   return (
     <UsersListContainer>
       <UserListTitle>UsersList</UserListTitle>
       <UserList>
-        {users.slice(0, 3).map(user => (
-          <User key={user.id} {...user} />
+        {users.map((user, index) => (
+          <User key={user.id} {...user} isLast={index === users.length - 1} />
         ))}
       </UserList>
+
+      <LoadMoreButton onClick={handleLoadMore}>Load More</LoadMoreButton>
     </UsersListContainer>
   );
 }

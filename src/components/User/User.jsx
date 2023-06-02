@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+
 import styled from 'styled-components';
 
 import tweetsImage from 'images/tweets.png';
-
+import { updateUser } from 'redux/users/operations';
 import logoImage from 'images/logo.svg';
 import FollowButton from 'components/Button/Button';
-import { useUpdateUserMutation } from 'redux/contacts/usersAPI';
 
 const UserCard = styled.li`
   position: relative;
@@ -67,7 +68,6 @@ const UserInfo = styled.p`
   font-size: 20px;
   line-height: 24px;
   text-transform: uppercase;
-  /* color: #ebd8ff; */
   margin-bottom: 16px;
 `;
 
@@ -95,16 +95,33 @@ const Details = styled.div`
   justify-content: flex-end;
 `;
 
-function User({ id, user, avatar, tweets, followers, amIFollow }) {
-  const [updateUserMutation] = useUpdateUserMutation();
+function User({ id, user, avatar, tweets, followers, amIFollow, isLast }) {
+  const dispatch = useDispatch();
+  const imageRef = useRef();
   const onFollowClick = () => {
-    const updatedUser = { id: id, amIFollow: !amIFollow };
-    console.log('onFollowClick', updatedUser);
-
-    updateUserMutation(updatedUser);
+    const updatedUser = {
+      id,
+      user,
+      avatar,
+      tweets,
+      followers,
+      amIFollow: !amIFollow,
+    };
+    dispatch(updateUser(updatedUser));
   };
+
+  useEffect(() => {
+    if (isLast) {
+      imageRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'center',
+      });
+    }
+  }, [isLast]);
+
   return (
-    <UserCard>
+    <UserCard ref={isLast ? imageRef : null}>
       <LogoWrapper>
         <img src={logoImage} alt="logo GoIT" />
       </LogoWrapper>
@@ -116,7 +133,7 @@ function User({ id, user, avatar, tweets, followers, amIFollow }) {
       <Details>
         <UserInfo>Tweets: {tweets}</UserInfo>
         <UserInfo>Followers: {followers}</UserInfo>
-        <FollowButton amIFollow={false} onClick={onFollowClick} />
+        <FollowButton amIFollow={amIFollow} onClick={onFollowClick} />
       </Details>
     </UserCard>
   );
