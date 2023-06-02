@@ -1,27 +1,60 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { TextField } from '@mui/material';
-
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { SHOW_ALL, SHOW_FOLLOW, SHOW_FOLLOWING } from 'constants';
 import { setFilter } from 'redux/filter/filterSlice';
-import { useFilter } from 'hooks/useFilter';
+import { selectFilter } from 'redux/filter/filterSelectors';
+import { Button, Menu, MenuItem } from '@mui/material';
 
-export function Filter() {
-  const { filter } = useFilter();
-
+const Filter = () => {
   const dispatch = useDispatch();
+  const filter = useSelector(selectFilter);
+  const [anchorEl, setAnchorEl] = useState(null);
 
-  const onChange = e => {
-    dispatch(setFilter(e.target.value));
+  const handleFilterChange = selectedFilter => {
+    dispatch(setFilter(selectedFilter));
+    setAnchorEl(null);
+  };
+
+  const handleMenuOpen = event => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
   };
 
   return (
-    <TextField
-      type="text"
-      label="Find contacts by name"
-      name="filter"
-      placeholder="Enter your search"
-      value={filter}
-      onChange={onChange}
-    />
+    <div>
+      <Button id="filter" onClick={handleMenuOpen}>
+        Filter
+      </Button>
+      <Menu
+        id="filter-menu"
+        anchorEl={anchorEl}
+        open={Boolean(anchorEl)}
+        onClose={handleMenuClose}
+      >
+        <MenuItem
+          onClick={() => handleFilterChange(SHOW_ALL)}
+          selected={filter === SHOW_ALL}
+        >
+          Show All
+        </MenuItem>
+        <MenuItem
+          onClick={() => handleFilterChange(SHOW_FOLLOW)}
+          selected={filter === SHOW_FOLLOW}
+        >
+          Follow
+        </MenuItem>
+        <MenuItem
+          onClick={() => handleFilterChange(SHOW_FOLLOWING)}
+          selected={filter === SHOW_FOLLOWING}
+        >
+          Followings
+        </MenuItem>
+      </Menu>
+    </div>
   );
-}
+};
+
+export default Filter;

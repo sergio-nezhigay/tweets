@@ -1,18 +1,26 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchUsers, updateUser } from './operations';
+import { fetchUsers, updateUser, countUsers } from './operations';
 
 export const usersSlice = createSlice({
   name: 'users',
   initialState: {
     users: [],
+    totalUsers: 0,
     status: 'idle',
     error: null,
   },
   reducers: {},
   extraReducers: builder => {
     builder
+      .addCase(countUsers.pending, state => {
+        state.status = 'loading';
+      })
       .addCase(fetchUsers.pending, state => {
         state.status = 'loading';
+      })
+      .addCase(countUsers.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.totalUsers = action.payload;
       })
       .addCase(fetchUsers.fulfilled, (state, action) => {
         state.status = 'succeeded';

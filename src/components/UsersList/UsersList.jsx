@@ -4,17 +4,19 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import User from 'components/User/User';
 
-import { selectUsers } from 'redux/users/selectors';
-import { fetchUsers } from 'redux/users/operations';
+import { selectFilter } from 'redux/filter/filterSelectors';
+import { selectUsers, selectTotalUsers } from 'redux/users/selectors';
+import { fetchUsers, countUsers } from 'redux/users/operations';
+import {
+  USERS_PER_PAGE,
+  SHOW_ALL,
+  SHOW_FOLLOW,
+  SHOW_FOLLOWING,
+} from 'constants';
 
 const UsersListContainer = styled.div`
   background-color: #f2f2f2;
   padding: 20px;
-`;
-
-const UserListTitle = styled.h1`
-  font-size: 24px;
-  margin-bottom: 10px;
 `;
 
 const UserList = styled.ul`
@@ -22,7 +24,7 @@ const UserList = styled.ul`
   grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
   gap: 32px;
   list-style: none;
-  padding: 0;
+  justify-items: center;
 `;
 
 const LoadMoreButton = styled.button`
@@ -36,25 +38,56 @@ const LoadMoreButton = styled.button`
 
 export default function UsersList() {
   const dispatch = useDispatch();
+  const totalUsers = useSelector(selectTotalUsers);
   const users = useSelector(selectUsers);
+  const filter = useSelector(selectFilter);
   const [page, setPage] = useState(1);
+
   useEffect(() => {
     dispatch(fetchUsers({ page }));
   }, [page, dispatch]);
+
+  useEffect(() => {
+    dispatch(countUsers(filter));
+  }, [filter, dispatch]);
+
   const handleLoadMore = () => {
     setPage(page => page + 1);
   };
 
+  const filteredUsers = users.filter(user => {
+    switch (filter) {
+      case SHOW_ALL:
+        return true;
+      case SHOW_FOLLOWING:
+        if (user.amIFollow) {
+          return true;
+        } else {
+          return false;
+        }
+      case SHOW_FOLLOW:
+        if (!user.amIFollow) {
+          return true;
+        } else {
+          return false;
+        }
+      default:
+        return true;
+    }
+  });
+
+  const isLoadmoreButtonVisible = totalUsers / USERS_PER_PAGE > page;
+
   return (
     <UsersListContainer>
-      <UserListTitle>UsersList</UserListTitle>
       <UserList>
-        {users.map((user, index) => (
+        {filteredUsers.map((user, index) => (
           <User key={user.id} {...user} isLast={index === users.length - 1} />
         ))}
       </UserList>
-
-      <LoadMoreButton onClick={handleLoadMore}>Load More</LoadMoreButton>
+      {isLoadmoreButtonVisible && (
+        <LoadMoreButton onClick={handleLoadMore}>Load More</LoadMoreButton>
+      )}
     </UsersListContainer>
   );
 }

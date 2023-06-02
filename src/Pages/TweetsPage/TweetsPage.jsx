@@ -7,7 +7,6 @@ export default function TweetsPage() {
       <Helmet>
         <title>Tweets</title>
       </Helmet>
-      <h1>Tweets1 sry</h1>
       <UsersList />
     </div>
   );

@@ -115,10 +115,19 @@ function User({ id, user, avatar, tweets, followers, amIFollow, isLast }) {
       imageRef.current.scrollIntoView({
         behavior: 'smooth',
         block: 'nearest',
-        inline: 'center',
+        inline: 'end',
       });
     }
   }, [isLast]);
+
+  function formatNumberWithComma(number) {
+    const parts = number.toString().split('.');
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return parts.join('.');
+  }
+  const followersUI = amIFollow ? followers + 1 : followers;
+
+  const formattedNumber = formatNumberWithComma(followersUI);
 
   return (
     <UserCard ref={isLast ? imageRef : null}>
@@ -132,7 +141,7 @@ function User({ id, user, avatar, tweets, followers, amIFollow, isLast }) {
       <Line />
       <Details>
         <UserInfo>Tweets: {tweets}</UserInfo>
-        <UserInfo>Followers: {followers}</UserInfo>
+        <UserInfo>Followers: {formattedNumber}</UserInfo>
         <FollowButton amIFollow={amIFollow} onClick={onFollowClick} />
       </Details>
     </UserCard>

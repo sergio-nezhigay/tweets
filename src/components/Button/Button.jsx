@@ -1,22 +1,19 @@
-import React from 'react';
-import styled from 'styled-components';
-
-const Button = styled.button`
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 22px;
-  text-transform: uppercase;
-  color: #373737;
-  padding: 14px 39px;
-  margin-top: 10px;
-  background: ${({ amIFollow }) => (amIFollow ? '#5CD3A8' : '#EBD8FF')};
-  box-shadow: 0px 3.43693px 3.43693px rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
-`;
+import React, { useState } from 'react';
+import { Button } from './Button.styled';
 
 function FollowButton({ amIFollow, onClick }) {
+  const [animate, setAnimate] = useState(false);
+
+  const handleClick = () => {
+    setAnimate(true);
+    setTimeout(() => {
+      setAnimate(false);
+    }, 1000);
+    onClick();
+  };
+
   return (
-    <Button amIFollow={amIFollow} onClick={onClick}>
+    <Button amIFollow={amIFollow} animate={animate} onClick={handleClick}>
       {amIFollow ? 'Following' : 'Follow'}
     </Button>
   );
