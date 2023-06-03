@@ -39,7 +39,7 @@ const TweetsImage = styled.img`
 
 const Avatar = styled.img`
   position: relative;
-  max-width: 80%;
+  max-width: 62.5px;
   object-fit: cover;
   border-radius: 50%;
   z-index: 1;
@@ -88,7 +88,7 @@ const LogoWrapper = styled.div`
   height: 50%;
 `;
 const Details = styled.div`
-  padding-top: 60px;
+  padding-top: 62px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -134,7 +134,7 @@ function User({ id, user, avatar, tweets, followers, amIFollow, isLast }) {
       <LogoWrapper>
         <img src={logoImage} alt="logo GoIT" />
       </LogoWrapper>
-      <TweetsImage src={tweetsImage} alt="tweets" />
+      <TweetsImage src={tweetsImage} alt="tweets decoration" />
       <RoundBG>
         <Avatar src={avatar} alt={user} />
       </RoundBG>

@@ -20,14 +20,14 @@ export const Link = styled(NavLink)`
   font-weight: 500;
 
   &.active {
-    color: white;
-    background-color: orangered;
+    color: #ffffff;
+    background-color: #ebcf27;
   }
 `;
 
 export const Navigation = () => {
   return (
-    <AppBar position="static" sx={{ mb: 3 }}>
+    <AppBar position="fixed" sx={{ backgroundColor: '#29479F' }}>
       <Container>
         <Toolbar disableGutters>
           <Nav>
