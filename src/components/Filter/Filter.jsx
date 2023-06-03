@@ -3,11 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Menu, MenuItem } from '@mui/material';
 
 import { ButtonFilterStyled } from './Filter.styled';
-import { setFilter } from 'redux/filter/filterSlice';
-import { selectFilter } from 'redux/filter/filterSelectors';
+// import { setFilter } from 'redux/filter/filterSlice';
+import { setFilter } from 'redux/users/usersSlice';
+// import { selectFilter } from 'redux/filter/filterSelectors';
+import { selectFilter } from 'redux/users/selectors';
+
 import { SHOW_ALL, SHOW_FOLLOW, SHOW_FOLLOWING } from 'constants';
 
-const Filter = () => {
+export default function Filter() {
   const dispatch = useDispatch();
   const filter = useSelector(selectFilter);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -57,6 +60,4 @@ const Filter = () => {
       </Menu>
     </div>
   );
-};
-
-export default Filter;
+}

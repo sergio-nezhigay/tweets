@@ -1,69 +1,75 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { selectFilter } from 'redux/filter/filterSelectors';
-import { selectUsers, selectTotalUsers } from 'redux/users/selectors';
-import { fetchUsers, fetchUsersInit, countUsers } from 'redux/users/operations';
+import { selectFilter } from 'redux/users/selectors';
+
+import {
+  selectUsers,
+  selectTotalUsers,
+  selectCurrentPage,
+} from 'redux/users/selectors';
+
+import { incrementPage, resetPagination } from 'redux/users/usersSlice';
+
+import { loadMoreUsers, countUsers } from 'redux/users/operations';
 import {
   USERS_PER_PAGE,
   SHOW_ALL,
   SHOW_FOLLOW,
   SHOW_FOLLOWING,
 } from 'constants';
-import User from 'components/User/User';
-import { UserList, LoadMoreButton } from './UserList.styled';
+import User from 'components/User';
+
+import { UserListStyled, LoadMoreButton } from './UserList.styled';
 
 export default function UsersList() {
   const dispatch = useDispatch();
   const totalUsers = useSelector(selectTotalUsers);
   const users = useSelector(selectUsers);
   const filter = useSelector(selectFilter);
-  const [page, setPage] = useState(1);
+  const page = useSelector(selectCurrentPage);
 
   useEffect(() => {
-    if (page === 1) {
-      dispatch(fetchUsersInit());
-    } else {
-      dispatch(fetchUsers({ page }));
-    }
+    dispatch(loadMoreUsers({ page }));
   }, [dispatch, page]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetPagination());
+    };
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(countUsers(filter));
   }, [filter, dispatch]);
 
   const handleLoadMore = () => {
-    setPage(page => page + 1);
+    dispatch(incrementPage());
   };
 
-  const filteredUsers = users.filter(user => {
-    switch (filter) {
-      case SHOW_ALL:
-        return true;
-      case SHOW_FOLLOWING:
-        if (user.amIFollow) {
+  const filteredUsers = useMemo(() => {
+    return users.filter(user => {
+      switch (filter) {
+        case SHOW_ALL:
           return true;
-        } else {
-          return false;
-        }
-      case SHOW_FOLLOW:
-        if (!user.amIFollow) {
+        case SHOW_FOLLOWING:
+          return user.amIFollow;
+        case SHOW_FOLLOW:
+          return !user.amIFollow;
+        default:
           return true;
-        } else {
-          return false;
-        }
-      default:
-        return true;
-    }
-  });
+      }
+    });
+  }, [users, filter]);
 
-  const isLoadmoreButtonVisible = totalUsers / USERS_PER_PAGE > page;
+  const isLoadmoreButtonVisible =
+    totalUsers / USERS_PER_PAGE > page || totalUsers > filteredUsers.length;
 
   return (
     <>
       {!!filteredUsers.length && (
         <>
-          <UserList>
+          <UserListStyled>
             {filteredUsers.map((user, index) => (
               <User
                 key={user.id}
@@ -71,7 +77,8 @@ export default function UsersList() {
                 isLast={index === users.length - 1}
               />
             ))}
-          </UserList>
+          </UserListStyled>
+
           {isLoadmoreButtonVisible && (
             <LoadMoreButton onClick={handleLoadMore}>Load More</LoadMoreButton>
           )}

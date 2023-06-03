@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { updateUser } from 'redux/users/operations';
-import FollowButton from 'components/FollowButton/FollowButton';
+import FollowButton from 'components/FollowButton';
 
 import logoImage from 'images/logo.svg';
 import tweetsImage from 'images/tweets.png';
@@ -18,7 +18,15 @@ import {
   TweetsImage,
 } from './User.styled';
 
-function User({ id, user, avatar, tweets, followers, amIFollow, isLast }) {
+export default function User({
+  id,
+  user,
+  avatar,
+  tweets,
+  followers,
+  amIFollow,
+  isLast,
+}) {
   const dispatch = useDispatch();
   const imageRef = useRef();
   const onFollowClick = () => {
@@ -70,5 +78,3 @@ function User({ id, user, avatar, tweets, followers, amIFollow, isLast }) {
     </UserCard>
   );
 }
-
-export default User;

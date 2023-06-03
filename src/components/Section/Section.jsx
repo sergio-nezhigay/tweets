@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Container, Titlehidden, Title, SectionStyled } from './Section.styled';
 
-export const Section = ({ title, children, isHidden }) => {
+export default function Section({ title, children, isHidden }) {
   return (
     <SectionStyled sx={{ padding: 3 }} component="fieldset">
       <Container>
@@ -12,7 +12,7 @@ export const Section = ({ title, children, isHidden }) => {
       </Container>
     </SectionStyled>
   );
-};
+}
 
 Section.propTypes = {
   title: PropTypes.string.isRequired,

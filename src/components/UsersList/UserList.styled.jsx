@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const UserList = styled.ul`
+export const UserListStyled = styled.ul`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
   gap: 32px;
@@ -21,9 +21,9 @@ export const LoadMoreButton = styled.button`
   color: #ffffff;
   font-weight: 600;
   background-color: #29479f;
-  transition: background-color 0.2s; /* Add transition property for smooth color change */
+  transition: background-color 0.2s;
   &:hover {
-    background-color: #ebcf27; /* Change the background color on hover */
+    background-color: #ebcf27;
   }
   &.active {
     color: #3c5ca7;

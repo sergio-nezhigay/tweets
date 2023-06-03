@@ -1,10 +1,10 @@
 import { AppBar, Toolbar, Container, Box } from '@mui/material';
 import { useLocation } from 'react-router-dom';
-import Filter from 'components/Filter/Filter';
+import Filter from 'components/Filter';
 
 import { Nav, NavLinkStyled } from './Navigation.styled';
 
-export const Navigation = () => {
+export default function Navigation() {
   const location = useLocation();
   const isTweetsRoute = location.pathname === '/tweets';
 
@@ -28,4 +28,4 @@ export const Navigation = () => {
       </Container>
     </AppBar>
   );
-};
+}

@@ -1,20 +1,41 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
+  loadMoreUsers,
   fetchUsers,
   fetchUsersInit,
   updateUser,
   countUsers,
 } from './operations';
+import { SHOW_ALL } from 'constants';
+
+const initialState = {
+  users: [],
+  currentPage: 1,
+  totalUsers: 0,
+  status: 'idle',
+  error: null,
+  filter: SHOW_ALL,
+};
 
 export const usersSlice = createSlice({
   name: 'users',
-  initialState: {
-    users: [],
-    totalUsers: 0,
-    status: 'idle',
-    error: null,
+  initialState,
+  reducers: {
+    setFilter(state, action) {
+      state.filter = action.payload;
+    },
+    resetPagination(state) {
+      state.currentPage = initialState.currentPage;
+      state.users = initialState.users;
+      state.totalUsers = initialState.totalUsers;
+      state.status = initialState.status;
+      state.error = initialState.error;
+      state.filter = initialState.filter;
+    },
+    incrementPage(state) {
+      state.currentPage++;
+    },
   },
-  reducers: {},
   extraReducers: builder => {
     builder
       .addCase(countUsers.pending, state => {
@@ -23,11 +44,14 @@ export const usersSlice = createSlice({
       .addCase(fetchUsers.pending, state => {
         state.status = 'loading';
       })
+      .addCase(loadMoreUsers.pending, state => {
+        state.status = 'loading';
+      })
       .addCase(countUsers.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.totalUsers = action.payload;
       })
-      .addCase(fetchUsers.fulfilled, (state, action) => {
+      .addCase(loadMoreUsers.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.users.push(...action.payload);
       })
@@ -59,4 +83,6 @@ export const usersSlice = createSlice({
 
 export const { reducer } = usersSlice;
 export const { actions } = usersSlice;
+export const { setFilter, incrementPage, resetPagination } = usersSlice.actions;
+
 export const usersReducer = usersSlice.reducer;

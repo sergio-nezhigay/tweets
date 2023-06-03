@@ -1,6 +1,7 @@
 import { Helmet } from 'react-helmet';
-import UsersList from 'components/UsersList/UsersList';
-import { Section } from 'components/Section/Section';
+
+import UsersList from 'components/UsersList';
+import Section from 'components/Section';
 
 export default function TweetsPage() {
   return (

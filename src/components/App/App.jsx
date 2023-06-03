@@ -2,12 +2,12 @@ import { Route, Routes } from 'react-router-dom';
 import { lazy } from 'react';
 import { Navigate } from 'react-router-dom';
 
-import SharedLayout from '../SharedLayout/SharedLayout';
+import SharedLayout from 'components/SharedLayout/';
 
-const HomeView = lazy(() => import('Pages/HomeView/HomeView'));
-const TweetsPage = lazy(() => import('Pages/TweetsPage/TweetsPage'));
+const HomeView = lazy(() => import('Pages/HomeView'));
+const TweetsPage = lazy(() => import('Pages/TweetsPage'));
 
-export const App = () => {
+export default function App() {
   return (
     <Routes>
       <Route path="/" element={<SharedLayout />}>
@@ -17,4 +17,4 @@ export const App = () => {
       </Route>
     </Routes>
   );
-};
+}

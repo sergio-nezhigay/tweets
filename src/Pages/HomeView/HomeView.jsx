@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { Helmet } from 'react-helmet';
-import { Section } from 'components/Section/Section';
+import Section from 'components/Section';
 
 const SubTitle = styled.h2`
   font-size: 24px;
@@ -30,7 +30,7 @@ const FollowButton = styled.button`
   }
 `;
 
-const HomeView = () => {
+export default function HomeView() {
   return (
     <>
       <Helmet>
@@ -92,6 +92,4 @@ const HomeView = () => {
       </Section>
     </>
   );
-};
-
-export default HomeView;
+}

@@ -18,6 +18,15 @@ export const fetchUsers = createAsyncThunk(
   }
 );
 
+export const loadMoreUsers = createAsyncThunk(
+  'users/loadMoreUsers',
+  async ({ page = 1, limit = USERS_PER_PAGE }) => {
+    const url = `/users?page=${page}&limit=${limit}`;
+    const response = await axios.get(url);
+    return response.data;
+  }
+);
+
 export const fetchUsersInit = createAsyncThunk(
   'users/fetchUsersInit',
   async () => {

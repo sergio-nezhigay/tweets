@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FollowButtonStyled } from './FollowButton.styled';
 
-function FollowButton({ amIFollow, onClick }) {
+export default function FollowButton({ amIFollow, onClick }) {
   const [animate, setAnimate] = useState(false);
 
   const handleClick = () => {
@@ -22,5 +22,3 @@ function FollowButton({ amIFollow, onClick }) {
     </FollowButtonStyled>
   );
 }
-
-export default FollowButton;
