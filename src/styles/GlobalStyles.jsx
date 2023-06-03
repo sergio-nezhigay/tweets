@@ -9,13 +9,10 @@ export const GlobalStyles = css`
 
   body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
-      'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
-      'Helvetica Neue', sans-serif;
+    font-family: Montserrat, sans-serif;
     color: ${theme.colors.dark};
     background: ${theme.colors.mainBackground};
     min-height: 100vh;
-
     font-style: normal;
   }
   li,
@@ -31,7 +28,7 @@ export const GlobalStyles = css`
 
   ul,
   ol {
-    /* list-style: none; */
+    list-style: none;
     list-style-position: inside;
     padding-left: 0;
     margin: 0;
@@ -47,7 +44,7 @@ export const GlobalStyles = css`
   }
 
   a {
-    /* text-decoration: none; */
+    text-decoration: none;
     color: inherit;
   }
 

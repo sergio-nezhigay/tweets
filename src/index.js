@@ -12,7 +12,7 @@ import { GlobalStyles } from 'styles';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
-      <BrowserRouter basename="tweets1">
+      <BrowserRouter basename="">
         <Global styles={GlobalStyles} />
         <App />
       </BrowserRouter>

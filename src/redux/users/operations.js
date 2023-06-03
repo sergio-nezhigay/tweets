@@ -18,6 +18,15 @@ export const fetchUsers = createAsyncThunk(
   }
 );
 
+export const fetchUsersInit = createAsyncThunk(
+  'users/fetchUsersInit',
+  async () => {
+    const url = `/users?page=${1}&limit=${USERS_PER_PAGE}`;
+    const response = await axios.get(url);
+    return response.data;
+  }
+);
+
 const getAmIFollowParameter = filter => {
   if (filter === SHOW_FOLLOW) {
     return '&amIFollow=false';

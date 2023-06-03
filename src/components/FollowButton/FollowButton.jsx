@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button } from './Button.styled';
+import { FollowButtonStyled } from './FollowButton.styled';
 
 function FollowButton({ amIFollow, onClick }) {
   const [animate, setAnimate] = useState(false);
@@ -13,9 +13,13 @@ function FollowButton({ amIFollow, onClick }) {
   };
 
   return (
-    <Button amIFollow={amIFollow} animate={animate} onClick={handleClick}>
+    <FollowButtonStyled
+      amIFollow={amIFollow}
+      animate={animate}
+      onClick={handleClick}
+    >
       {amIFollow ? 'Following' : 'Follow'}
-    </Button>
+    </FollowButtonStyled>
   );
 }
 

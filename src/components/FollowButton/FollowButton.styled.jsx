@@ -1,18 +1,26 @@
 import styled, { keyframes } from 'styled-components';
 
-export const Button = styled.button`
+export const FollowButtonStyled = styled.button`
   font-weight: 600;
   font-size: 18px;
   line-height: 22px;
   text-transform: uppercase;
   color: #373737;
-  padding: 14px 39px;
+  height: 50px;
+  min-width: 196px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-top: 10px;
   background: ${({ amIFollow }) => (amIFollow ? '#5CD3A8' : '#EBD8FF')};
   box-shadow: 0px 3.43693px 3.43693px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
   animation: ${({ animate }) => animate && shakeAnimation} 1s infinite;
-  transition: all 1s;
+  transition: all 0.5s;
+  &:hover {
+    background-color: ${({ amIFollow }) =>
+      amIFollow ? '#5cd3a7c2' : '#ebd8ffce'};
+  }
 `;
 
 const shakeAnimation = keyframes`

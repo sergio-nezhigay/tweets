@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { SHOW_ALL, SHOW_FOLLOW, SHOW_FOLLOWING } from 'constants';
+import { Menu, MenuItem } from '@mui/material';
+
+import { ButtonFilterStyled } from './Filter.styled';
 import { setFilter } from 'redux/filter/filterSlice';
 import { selectFilter } from 'redux/filter/filterSelectors';
-import { Button, Menu, MenuItem } from '@mui/material';
+import { SHOW_ALL, SHOW_FOLLOW, SHOW_FOLLOWING } from 'constants';
 
 const Filter = () => {
   const dispatch = useDispatch();
@@ -25,9 +27,9 @@ const Filter = () => {
 
   return (
     <div>
-      <Button id="filter" onClick={handleMenuOpen}>
-        Filter
-      </Button>
+      <ButtonFilterStyled id="filter" onClick={handleMenuOpen}>
+        Filter tweets
+      </ButtonFilterStyled>
       <Menu
         id="filter-menu"
         anchorEl={anchorEl}

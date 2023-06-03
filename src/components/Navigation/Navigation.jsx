@@ -1,46 +1,29 @@
-import { AppBar, Toolbar, Container, Button, Box } from '@mui/material';
-
+import { AppBar, Toolbar, Container, Box } from '@mui/material';
+import { useLocation } from 'react-router-dom';
 import Filter from 'components/Filter/Filter';
 
-import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
-
-export const Nav = styled.nav`
-  display: flex;
-  align-items: center;
-  width: 100%;
-  justify-content: space-between;
-`;
-
-export const Link = styled(NavLink)`
-  padding: 8px 16px;
-  border-radius: 4px;
-  text-decoration: none;
-  color: black;
-  font-weight: 500;
-
-  &.active {
-    color: #ffffff;
-    background-color: #ebcf27;
-  }
-`;
+import { Nav, NavLinkStyled } from './Navigation.styled';
 
 export const Navigation = () => {
+  const location = useLocation();
+  const isTweetsRoute = location.pathname === '/tweets';
+
   return (
     <AppBar position="fixed" sx={{ backgroundColor: '#29479F' }}>
       <Container>
-        <Toolbar disableGutters>
+        <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
           <Nav>
             <Box sx={{ display: 'flex' }}>
-              <Button color="inherit" component={Link} to="/">
-                Home
-              </Button>
-              <Button color="inherit" component={Link} to="/tweets">
-                Tweets
-              </Button>
+              <NavLinkStyled to="/">Home</NavLinkStyled>
+              <NavLinkStyled to="/tweets">Tweets</NavLinkStyled>
             </Box>
           </Nav>
-          <Filter />
+          {isTweetsRoute && (
+            <>
+              <Filter />
+              <NavLinkStyled to="/">Back</NavLinkStyled>
+            </>
+          )}
         </Toolbar>
       </Container>
     </AppBar>

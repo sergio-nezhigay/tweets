@@ -1,5 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchUsers, updateUser, countUsers } from './operations';
+import {
+  fetchUsers,
+  fetchUsersInit,
+  updateUser,
+  countUsers,
+} from './operations';
 
 export const usersSlice = createSlice({
   name: 'users',
@@ -25,6 +30,10 @@ export const usersSlice = createSlice({
       .addCase(fetchUsers.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.users.push(...action.payload);
+      })
+      .addCase(fetchUsersInit.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.users = [...action.payload];
       })
       .addCase(fetchUsers.rejected, (state, action) => {
         state.status = 'failed';
