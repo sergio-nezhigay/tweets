@@ -30,7 +30,6 @@ export default function User({
   avatar,
   tweets,
   followers,
-  // amIFollow,
   isLast,
   isFavorite,
 }) {
@@ -38,20 +37,15 @@ export default function User({
   const imageRef = useRef();
 
   const onFollowClick = () => {
-    const updatedUser = {
-      id,
-      user,
-      avatar,
-      tweets,
-      followers: isFavorite ? followers - 1 : followers + 1,
-    };
-
     if (!isFavorite) {
       dispatch(addFavoriteUser(id));
     } else {
       dispatch(removeFavoriteUser(id));
     }
-
+    const updatedUser = {
+      id,
+      followers: isFavorite ? followers - 1 : followers + 1,
+    };
     dispatch(updateUser(updatedUser));
   };
 

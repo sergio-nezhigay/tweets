@@ -15,13 +15,13 @@ the counter.
 1. Clone the repository:
 
    ```
-   git clone https://github.com/sergio-nezhigay/tweets1.git
+   git clone https://github.com/sergio-nezhigay/tweets.git
    ```
 
 2. Navigate to the project directory:
 
    ```
-   cd tweet-user-cards-app
+   cd tweets
    ```
 
 3. Install dependencies:
@@ -40,6 +40,7 @@ the counter.
 
    ```
    http://localhost:3000
+   or just run from https://sergio-nezhigay.github.io/tweets
 
    ```
 
@@ -68,7 +69,7 @@ the counter.
 ## Credits
 
 This application was created by Serhii Nezhihai. Feel free to contact me at
-abc@gmail.com.
+abc1971h@gmail.com.
 
 ## Contributing
 
