@@ -11,7 +11,7 @@ import { GlobalStyles } from 'styles';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
-    <BrowserRouter basename="">
+    <BrowserRouter basename="tweets">
       <Global styles={GlobalStyles} />
       <App />
     </BrowserRouter>

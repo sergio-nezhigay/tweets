@@ -2,7 +2,7 @@
   "name": "tweets1",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://sergio-nezhigay.github.io/tweets1",
+  "homepage": "https://sergio-nezhigay.github.io/tweets",
   "dependencies": {
     "@emotion/react": "latest",
     "@emotion/styled": "latest",
