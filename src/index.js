@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+// import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
 import { Global } from '@emotion/react';
@@ -11,9 +12,13 @@ import { GlobalStyles } from 'styles';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
-    <BrowserRouter basename="tweets">
+    <HashRouter>
       <Global styles={GlobalStyles} />
       <App />
-    </BrowserRouter>
+    </HashRouter>
+    {/* <BrowserRouter basename="tweets">
+      <Global styles={GlobalStyles} />
+      <App />
+    </BrowserRouter> */}
   </Provider>
 );
