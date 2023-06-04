@@ -13,7 +13,7 @@ export default function App() {
       <Route path="/" element={<SharedLayout />}>
         <Route index element={<HomeView />} />
         <Route path="/tweets" element={<TweetsPage />} />
-        <Route path="/*" element={<Navigate to={'/'} />} />
+        <Route path="*" element={<Navigate to={'/'} />} />
       </Route>
     </Routes>
   );
