@@ -29,4 +29,8 @@ export const LoadMoreButton = styled.button`
     color: #3c5ca7;
     background-color: #ebcf27;
   }
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 `;

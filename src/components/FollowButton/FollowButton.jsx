@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FollowButtonStyled } from './FollowButton.styled';
 
-export default function FollowButton({ amIFollow, onClick }) {
+export default function FollowButton({ isFavorite, onClick }) {
   const [animate, setAnimate] = useState(false);
 
   const handleClick = () => {
@@ -15,16 +15,16 @@ export default function FollowButton({ amIFollow, onClick }) {
 
   return (
     <FollowButtonStyled
-      amIFollow={amIFollow}
-      animate={animate}
+      isfavorite={isFavorite ? 'true' : ''}
+      animate={animate ? 'true' : ''}
       onClick={handleClick}
     >
-      {amIFollow ? 'Following' : 'Follow'}
+      {isFavorite ? 'Following' : 'Follow'}
     </FollowButtonStyled>
   );
 }
 
 FollowButton.propTypes = {
-  amIFollow: PropTypes.bool.isRequired,
+  isFavorite: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
 };

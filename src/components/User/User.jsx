@@ -3,6 +3,11 @@ import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { updateUser } from 'redux/users/operations';
+import {
+  addFavoriteUser,
+  removeFavoriteUser,
+} from 'redux/favorites/favoritesSlice';
+
 import FollowButton from 'components/FollowButton';
 
 import logoImage from 'images/logo.svg';
@@ -25,20 +30,28 @@ export default function User({
   avatar,
   tweets,
   followers,
-  amIFollow,
+  // amIFollow,
   isLast,
+  isFavorite,
 }) {
   const dispatch = useDispatch();
   const imageRef = useRef();
+
   const onFollowClick = () => {
     const updatedUser = {
       id,
       user,
       avatar,
       tweets,
-      followers,
-      amIFollow: !amIFollow,
+      followers: isFavorite ? followers - 1 : followers + 1,
     };
+
+    if (!isFavorite) {
+      dispatch(addFavoriteUser(id));
+    } else {
+      dispatch(removeFavoriteUser(id));
+    }
+
     dispatch(updateUser(updatedUser));
   };
 
@@ -57,9 +70,6 @@ export default function User({
     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     return parts.join('.');
   }
-  const followersUI = amIFollow ? followers + 1 : followers;
-
-  const formattedNumber = formatNumberWithComma(followersUI);
 
   return (
     <UserCard ref={isLast ? imageRef : null}>
@@ -73,8 +83,8 @@ export default function User({
       <Line />
       <Details>
         <UserInfo>Tweets: {tweets}</UserInfo>
-        <UserInfo>Followers: {formattedNumber}</UserInfo>
-        <FollowButton amIFollow={amIFollow} onClick={onFollowClick} />
+        <UserInfo>Followers: {formatNumberWithComma(followers)}</UserInfo>
+        <FollowButton isFavorite={isFavorite} onClick={onFollowClick} />
       </Details>
     </UserCard>
   );
@@ -86,6 +96,6 @@ User.propTypes = {
   avatar: PropTypes.string.isRequired,
   tweets: PropTypes.number.isRequired,
   followers: PropTypes.number.isRequired,
-  amIFollow: PropTypes.bool.isRequired,
+  isFavorite: PropTypes.bool.isRequired,
   isLast: PropTypes.bool.isRequired,
 };
