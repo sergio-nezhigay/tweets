@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { FollowButtonStyled } from './FollowButton.styled';
 
 export default function FollowButton({ amIFollow, onClick }) {
@@ -22,3 +23,8 @@ export default function FollowButton({ amIFollow, onClick }) {
     </FollowButtonStyled>
   );
 }
+
+FollowButton.propTypes = {
+  amIFollow: PropTypes.bool.isRequired,
+  onClick: PropTypes.func.isRequired,
+};

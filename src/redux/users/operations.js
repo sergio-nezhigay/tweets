@@ -9,28 +9,12 @@ import {
 
 axios.defaults.baseURL = 'https://64787027362560649a2dc491.mockapi.io';
 
-export const fetchUsers = createAsyncThunk(
-  'users/fetchUsers',
-  async ({ page = 1, limit = USERS_PER_PAGE }) => {
-    const url = `/users?page=${page}&limit=${limit}`;
-    const response = await axios.get(url);
-    return response.data;
-  }
-);
-
 export const loadMoreUsers = createAsyncThunk(
   'users/loadMoreUsers',
-  async ({ page = 1, limit = USERS_PER_PAGE }) => {
-    const url = `/users?page=${page}&limit=${limit}`;
-    const response = await axios.get(url);
-    return response.data;
-  }
-);
-
-export const fetchUsersInit = createAsyncThunk(
-  'users/fetchUsersInit',
-  async () => {
-    const url = `/users?page=${1}&limit=${USERS_PER_PAGE}`;
+  async ({ page = 1, filter = SHOW_ALL }) => {
+    const url = `/users?page=${page}&limit=${USERS_PER_PAGE}${getAmIFollowParameter(
+      filter
+    )}`;
     const response = await axios.get(url);
     return response.data;
   }

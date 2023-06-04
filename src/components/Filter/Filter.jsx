@@ -1,18 +1,22 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Menu, MenuItem } from '@mui/material';
 
 import { ButtonFilterStyled } from './Filter.styled';
-// import { setFilter } from 'redux/filter/filterSlice';
 import { setFilter } from 'redux/users/usersSlice';
-// import { selectFilter } from 'redux/filter/filterSelectors';
-import { selectFilter } from 'redux/users/selectors';
-
+import useUsers from 'hooks';
 import { SHOW_ALL, SHOW_FOLLOW, SHOW_FOLLOWING } from 'constants';
+
+const filterOptions = [
+  { value: SHOW_ALL, label: 'Show All' },
+  { value: SHOW_FOLLOW, label: 'Follow' },
+  { value: SHOW_FOLLOWING, label: 'Followings' },
+];
 
 export default function Filter() {
   const dispatch = useDispatch();
-  const filter = useSelector(selectFilter);
+  const { filter } = useUsers();
+
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleFilterChange = selectedFilter => {
@@ -28,10 +32,13 @@ export default function Filter() {
     setAnchorEl(null);
   };
 
+  const selectorText =
+    filter === SHOW_ALL ? `Filter tweets` : `Filtered by: ${filter}`;
+
   return (
     <div>
       <ButtonFilterStyled id="filter" onClick={handleMenuOpen}>
-        Filter tweets
+        {selectorText}
       </ButtonFilterStyled>
       <Menu
         id="filter-menu"
@@ -39,24 +46,15 @@ export default function Filter() {
         open={Boolean(anchorEl)}
         onClose={handleMenuClose}
       >
-        <MenuItem
-          onClick={() => handleFilterChange(SHOW_ALL)}
-          selected={filter === SHOW_ALL}
-        >
-          Show All
-        </MenuItem>
-        <MenuItem
-          onClick={() => handleFilterChange(SHOW_FOLLOW)}
-          selected={filter === SHOW_FOLLOW}
-        >
-          Follow
-        </MenuItem>
-        <MenuItem
-          onClick={() => handleFilterChange(SHOW_FOLLOWING)}
-          selected={filter === SHOW_FOLLOWING}
-        >
-          Followings
-        </MenuItem>
+        {filterOptions.map(option => (
+          <MenuItem
+            key={option.value}
+            onClick={() => handleFilterChange(option.value)}
+            selected={filter === option.value}
+          >
+            {option.label}
+          </MenuItem>
+        ))}
       </Menu>
     </div>
   );

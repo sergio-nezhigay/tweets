@@ -1,34 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
-
 import { Helmet } from 'react-helmet';
+
 import Section from 'components/Section';
-
-const SubTitle = styled.h2`
-  font-size: 24px;
-  margin-bottom: 10px;
-  color: #1e90ff;
-`;
-
-const Paragraph = styled.p`
-  font-size: 20px;
-  margin-bottom: 25px;
-  color: #333;
-`;
-
-const FollowButton = styled.button`
-  padding: 10px 20px;
-  background-color: #5cd3a8;
-  color: #373737;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  &:hover {
-    background-color: #ff6347;
-  }
-`;
+import { SubTitle, Paragraph, FollowButton } from './HomeView.styled';
 
 export default function HomeView() {
   return (
@@ -78,9 +52,6 @@ export default function HomeView() {
 
         <Paragraph>
           We hope you have a fantastic time exploring the Tweet User Cards App.
-          Remember to keep an eye out for those little jokes along the way. We
-          believe that combining technology and humor can create a truly
-          unforgettable experience.
         </Paragraph>
 
         <Paragraph>

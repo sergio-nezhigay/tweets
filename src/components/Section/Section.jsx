@@ -17,4 +17,5 @@ export default function Section({ title, children, isHidden }) {
 Section.propTypes = {
   title: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
+  isHidden: PropTypes.bool,
 };

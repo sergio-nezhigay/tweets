@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import { updateUser } from 'redux/users/operations';
 import FollowButton from 'components/FollowButton';
@@ -78,3 +79,13 @@ export default function User({
     </UserCard>
   );
 }
+
+User.propTypes = {
+  id: PropTypes.string.isRequired,
+  user: PropTypes.string.isRequired,
+  avatar: PropTypes.string.isRequired,
+  tweets: PropTypes.number.isRequired,
+  followers: PropTypes.number.isRequired,
+  amIFollow: PropTypes.bool.isRequired,
+  isLast: PropTypes.bool.isRequired,
+};

@@ -1,15 +1,7 @@
 import React, { useEffect, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-import { selectFilter } from 'redux/users/selectors';
-
-import {
-  selectUsers,
-  selectTotalUsers,
-  selectCurrentPage,
-} from 'redux/users/selectors';
-
-import { incrementPage, resetPagination } from 'redux/users/usersSlice';
+import useUsers from 'hooks';
 
 import { loadMoreUsers, countUsers } from 'redux/users/operations';
 import {
@@ -24,27 +16,20 @@ import { UserListStyled, LoadMoreButton } from './UserList.styled';
 
 export default function UsersList() {
   const dispatch = useDispatch();
-  const totalUsers = useSelector(selectTotalUsers);
-  const users = useSelector(selectUsers);
-  const filter = useSelector(selectFilter);
-  const page = useSelector(selectCurrentPage);
+  const { totalUsers, users, filter, isLoading, page } = useUsers();
 
   useEffect(() => {
-    dispatch(loadMoreUsers({ page }));
-  }, [dispatch, page]);
-
-  useEffect(() => {
-    return () => {
-      dispatch(resetPagination());
-    };
-  }, [dispatch]);
+    if (page === 1) {
+      dispatch(loadMoreUsers({ filter }));
+    }
+  }, [dispatch, page, filter]);
 
   useEffect(() => {
     dispatch(countUsers(filter));
   }, [filter, dispatch]);
 
   const handleLoadMore = () => {
-    dispatch(incrementPage());
+    dispatch(loadMoreUsers({ page, filter }));
   };
 
   const filteredUsers = useMemo(() => {
@@ -64,6 +49,7 @@ export default function UsersList() {
 
   const isLoadmoreButtonVisible =
     totalUsers / USERS_PER_PAGE > page || totalUsers > filteredUsers.length;
+  const isLoadMoreButtonText = isLoading ? `Loading...` : `Load more`;
 
   return (
     <>
@@ -80,7 +66,9 @@ export default function UsersList() {
           </UserListStyled>
 
           {isLoadmoreButtonVisible && (
-            <LoadMoreButton onClick={handleLoadMore}>Load More</LoadMoreButton>
+            <LoadMoreButton onClick={handleLoadMore} disabled={isLoading}>
+              {isLoadMoreButtonText}
+            </LoadMoreButton>
           )}
         </>
       )}
